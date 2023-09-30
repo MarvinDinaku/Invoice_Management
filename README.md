@@ -8,63 +8,142 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+#Invoice Management System Documentation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#Setup Instructions
+1- Clone the Repository:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Clone the Laravel Invoice Management System repository to your local machine:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+bash
+Copy code
+git clone <repository_url>
+Install Dependencies:
 
-## Learning Laravel
+Navigate to the project directory and install the required PHP dependencies using Composer:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+bash
+Copy code
+cd Invoice_Management
+composer install
+Database Configuration:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Create a MySQL database for the application and configure the database connection in the .env file:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+makefile
+Copy code
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=invoice_management
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+Generate Application Key:
 
-## Laravel Sponsors
+Generate the Laravel application key:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+bash
+Copy code
+php artisan key:generate
+Run Migrations:
 
-### Premium Partners
+Run database migrations to create the necessary tables:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+bash
+Copy code
+php artisan migrate
+Start the Development Server:
 
-## Contributing
+Start the Laravel development server:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+bash
+Copy code
+php artisan serve
+The application should be running at http://localhost:8000.
 
-## Code of Conduct
+API Endpoints
+The Invoice Management System provides the following API endpoints:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Products
+Create a Product (POST):
 
-## Security Vulnerabilities
+URL: http://localhost:8000/api/products
+Body (JSON):
+json
+Copy code
+{
+    "name": "Product Name",
+    "price": 10.99
+}
+Update a Product (PUT):
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+URL: http://localhost:8000/api/products/{product_id}
+Body (JSON):
+json
+Copy code
+{
+    "name": "Updated Product Name",
+    "price": 12.99
+}
+Delete a Product (DELETE):
 
-## License
+URL: http://localhost:8000/api/products/{product_id}
+List all Products (GET):
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# Invoice_Management
->>>>>>> 6f556bfb43c6d7a7cfa5b94765d3aee85a705d6e
+URL: http://localhost:8000/api/products
+Invoices
+Create an Invoice with Line Items (POST):
+
+URL: http://localhost:8000/api/invoices
+Body (JSON):
+json
+Copy code
+{
+    "date": "2023-09-30",
+    "line_items": [
+        {
+            "product_id": 1,
+            "quantity": 2
+        },
+        {
+            "product_id": 2,
+            "quantity": 3
+        }
+    ],
+    "discount": 5.00
+}
+Update an Invoice and its Line Items (PUT):
+
+URL: http://localhost:8000/api/invoices/{invoice_id}
+Body (JSON):
+json
+Copy code
+{
+    "date": "2023-10-01",
+    "line_items": [
+        {
+            "product_id": 1,
+            "quantity": 4
+        }
+    ],
+    "discount": 10.00
+}
+Delete an Invoice (DELETE):
+
+URL: http://localhost:8000/api/invoices/{invoice_id}
+List all Invoices with Line Items and Associated Products (GET):
+
+URL: http://localhost:8000/api/invoices
+Retrieve a Single Invoice by ID (GET):
+
+URL: http://localhost:8000/api/invoices/{invoice_id}
+Replace http://localhost:8000 with the appropriate URL where your Laravel application is hosted.
+
+Testing with Postman
+Open Postman and create requests for each of the API endpoints mentioned above.
+
+Set the request method, URL, and provide the required JSON data in the request body where applicable.
+
+Send the requests to interact with the Invoice Management System.
+
+That's it! You now have a basic Invoice Management System set up with Laravel, and you can use Postman to test the API endpoints. Make sure to adjust the documentation and configurations according to your specific project requirements.
