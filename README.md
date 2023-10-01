@@ -28,16 +28,17 @@ Before getting started, make sure you have the following prerequisites installed
 Navigate to the project directory and install the required PHP dependencies using Composer:
 
 bash
-Copy code
+
 cd invoice-management-system
 composer install
+
 
 3. **Database Configuration:**
 
 Create a MySQL database for the application and configure the database connection in the .env file:
 
 makefile
-Copy code
+
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -45,27 +46,30 @@ DB_DATABASE=your_database_name
 DB_USERNAME=your_database_username
 DB_PASSWORD=your_database_password
 
+
 4. **Generate Application Key:**
 
 Generate the Laravel application key:
 
 bash
-Copy code
+
 php artisan key:generate
+
 Run Migrations:
 
 5. **Run database migrations to create the necessary tables:**
 
 bash
-Copy code
+
 php artisan migrate
+
 Start the Development Server:
 
 6. **Start the Laravel development server:**
 
 bash
-Copy code
 php artisan serve
+
 The application should be running at http://localhost:8000.
 
 **API Endpoints
@@ -77,22 +81,22 @@ Create a Product (POST):
 URL: http://localhost:8000/api/products
 Body (JSON):
 json
-Copy code
-**{
+{
     "name": "Product Name",
     "price": 10.99
-}**
+}
+
 
 * Update a Product (PUT):
 
 URL: http://localhost:8000/api/products/{product_id}
 Body (JSON):
 json
-Copy code
-**{
+{
     "name": "Updated Product Name",
     "price": 12.99
-}**
+}
+
 
 * Delete a Product (DELETE):
 
@@ -107,8 +111,7 @@ Create an Invoice with Line Items (POST):
 URL: http://localhost:8000/api/invoices
 Body (JSON):
 json
-Copy code
-**{
+{
     "date": "2023-09-30",
     "line_items": [
         {
@@ -121,15 +124,15 @@ Copy code
         }
     ],
     "discount": 5.00
-}**
+}
+
 
 *Update an Invoice and its Line Items (PUT):
 
 URL: http://localhost:8000/api/invoices/{invoice_id}
 Body (JSON):
 json
-Copy code
-**{
+{
     "date": "2023-10-01",
     "line_items": [
         {
@@ -138,7 +141,8 @@ Copy code
         }
     ],
     "discount": 10.00
-}**
+}
+
 
 *Delete an Invoice (DELETE):
 
